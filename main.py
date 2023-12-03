@@ -1,15 +1,13 @@
+from  __init__  import *
+
+#import test_model
 
 
-from  all_necessary_imports  import *
+#dpf.data_processing_filter_file_test()
+# tm.test_model_file_test()
 
-all_necessary_imports_file_test()
+# dex.data_exploration_file_test()
 
-data_processing_filter_file_test()
 
-data_processing_image_manipulation_file_test()
+# dpf.data_processing_filter_file_test()
 
-data_exploration_file_test()
-
-build_model_file_test()
-
-test_model_file_test()
