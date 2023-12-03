@@ -36,3 +36,8 @@ from data_processing_filter import *
 from data_processing_image_manipulation import *
 
 from build_model import *
+
+from test_model import *
+
+def all_necessary_imports_file_test():
+	print("*****  all_necessary_imports  file imported correctly *****")
