@@ -35,7 +35,7 @@ import cv2 as cv2
 
 
 
-__all__=["keras",
+__all__=["np","plt","keras",
 		"Sequential","Dense","Adam","to_categorical",
 		"Dropout","Flatten","Conv2D","MaxPooling2D",
 		"pickle","pd","random","cv2"];
