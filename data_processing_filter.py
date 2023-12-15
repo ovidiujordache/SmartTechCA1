@@ -1,16 +1,17 @@
+to_exclude = ['abcd']
+
 from  __init__  import *
 
-
-
-
+for name in to_exclude:
+    del globals()[name]
    
 #Adding imports from working files .
-#Example. this file needs data_exploration
+#Example. this file needs a method from  data_exploration file
 
-import data_exploration as dex
+from data_exploration import data_exploration_file_test
 
 
 def data_processing_filter_file_test():
 	print("1. data_processing_filter  File imported correctly")
 
-dex.data_exploration_file_test()
+data_exploration_file_test()

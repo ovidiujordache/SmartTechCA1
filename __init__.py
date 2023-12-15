@@ -3,7 +3,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
-import keras
+import keras as keras
 
 from keras.models import Sequential as Sequential
 
@@ -19,6 +19,7 @@ from keras.layers import Dropout as Dropout
 from keras.layers import Flatten as Flatten
 
 from keras.layers import Conv2D as Conv2D
+
 from keras.layers import  MaxPooling2D as MaxPooling2D
 
 import pickle as pickle
