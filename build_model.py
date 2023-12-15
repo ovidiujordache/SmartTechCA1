@@ -15,6 +15,8 @@ def build_model_file_test():
 	print("4 .build_model File imported correctly")
 
 
+def added_method():
+	print("added method")
 
 data_processing_filter_file_test()
 
