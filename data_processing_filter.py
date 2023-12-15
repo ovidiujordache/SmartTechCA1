@@ -1,10 +1,8 @@
-to_exclude = ['abcd']
+
 
 from  __init__  import *
 
-for name in to_exclude:
-    del globals()[name]
-   
+
 #Adding imports from working files .
 #Example. this file needs a method from  data_exploration file
 
