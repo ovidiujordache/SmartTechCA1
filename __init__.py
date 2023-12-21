@@ -3,6 +3,8 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+import tensorflow as tf
+
 import keras as keras
 
 from keras.models import Sequential as Sequential
@@ -36,7 +38,7 @@ import cv2 as cv2
 
 
 
-__all__=["np","plt","keras",
+__all__=["tf","np","plt","keras",
 		"Sequential","Dense","Adam","to_categorical",
 		"Dropout","Flatten","Conv2D","MaxPooling2D",
 		"pickle","pd","random","cv2"];
