@@ -5,21 +5,40 @@ from  data_loading_exploration import *
 
 class DataProcessing:
 
-	def __init(self):
-		X_train={}
-		Y_train={}
 
 
-	def data_summary():
-		dex = DataExploration()
 
-		dex.display_data_keys_and_labels()
 
-		cipar_100_labels, cipar_10_labels = dex.unique_labels()
+	def __init__(self):
+		#getting the data for two
+		self.dex= DataExploration()
+		(self.X_train_100,self.y_train_100),(self.X_test_100,self.y_test_100)=self.dex.X_y_test_train_100()
+		(self.X_train_10,self.y_train_10),(self.X_test_10,self.y_test_10)=self.dex.X_y_test_train_10()
+		#this is combined data
+		(self.X_train,self.y_train),(self.X_test,self.y_test)=(0,0),(0,0)
 
-		dex.display_data_keys_and_labels()
+	def set_data(self):
+		self.dex.display_image_label()
+		# self.X_train
+		
+# automobile, bird, cat, deer, dog, horse, truck cipar10
 
-		dex.display_data_shape()
+#cipar100
+# cattle, fox, baby, boy, girl, man, woman, rabbit, squirrel, trees
+# (superclass), bicycle, bus, motorcycle, pickup truck, train, lawn-mower and tractor 
+
+
+
+
+
+ # 1 .bird, 2.cat, 3.deer, 4.dog, 5.horse, 6.truck, 7.cattle, 8.fox, 9.baby, 10,boy, 11.girl, 12.man, 13.woman, 14.rabbit, 15.squirrel,
+ #16.trees, 17.bicycle, 18.bus, 19.motorcycle, 20.pickup truck, 
+ # 21.train, 23.lawn-mower , 24.tractor
+ #24 classes. 
+
+
+
+# print(X_train)	
 		
 		
 

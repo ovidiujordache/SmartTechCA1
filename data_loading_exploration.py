@@ -4,35 +4,63 @@ from __init__ import *
 
 class DataExploration:
 	def __init__(self):
+		#cipra100 X,y, test data
+		self.X_train_100=None
+		self.y_train_100=None
+		self.X_test_100=None
+		self.y_test_100=None
+
+		#cipra10 X,y, test data
+		self.Xtrain_10=None
+		self.y_train_10=None
+		self.X_test_100=None
+		self.y_test_100=None
+
+		#all data in cipra100
 		self.cipar_100_train = {}
 
-		
+		#all test data in cipra100
 		self.cipar_100_test={}
+
+		#meta data in cipra100
+		self.cipar_100_meta={}
 		
+
+		#all data in cipra10
 		self.cipar_10_train={}
 		
-	
-
+		#test data in cipra10
 		self.cipar_10_test={}
-		
-		self.cipar_100_meta={}
 
-		#file name is batches.meta
+		#meta data in cipra10
 		self.cipar_10_meta={}
 		
+
+		
+		#Fine labels of cipar100 no-duplicates 
 		self.unique_labels_cipar_100=None
 		
+		#Course labels in cipar100
 		self.coarse_labels_cipar_100=None
-		
-		self.unique_labels_cipar_10=None
-		
+
+		#labels in meta cipar 100
 		self.unique_labels_meta_cipar_100=None
 		
+
+		
+		#labels in cipar10
+		self.unique_labels_cipar_10=None
+		
+		#labels in meta cipar10
 		self.unique_labels_meta_cipar_10=None
 		
-		self._load_cipar_10_data()
-		
+		#loading data from cipar100
 		self._load_cipar_100_data()
+
+		#loading cipar10 batches data from unzipped archive
+		#data not in the repo
+		self._load_cipar_10_data()
+	
 
 
 	def _load_cipar_10_data(self):
@@ -71,7 +99,8 @@ class DataExploration:
 		with open('./data/cifar-10-batches-py/batches.meta', 'rb')as fo:
 			self.cipar_10_meta=pickle.load(fo,encoding='bytes')
 			
-	 
+	 	# loading X_train y_train from cipar10 using tensorflow datasets
+		(self.X_train_10,self.y_train_10),(self.X_test_10,self.y_test_10)=datasets.cifar10.load_data()
 
 	def _load_cipar_100_data(self):
 		# Training data  cipar 100
@@ -87,6 +116,8 @@ class DataExploration:
 
 		with open('./data/cifar-100-python/meta', 'rb') as fo:
 			self.cipar_100_meta=pickle.load(fo,encoding='bytes')
+			#loading X_train y_train, test from cipar100 using tensorflow datasets
+		(self.X_train_100,self.y_train_100),(self.X_test_100,self.y_test_100)=datasets.cifar100.load_data()
 
 
 	# Checking data types
@@ -129,10 +160,14 @@ class DataExploration:
 		
 		print("Data keys for cipar_10_train: {}".format(self.cipar_10_train.keys()))
 
-		print("\n****************************************************************************************************")
-		
 
-		print("\nLABELS TRAINING DATA/ META DATA********************************\n")
+
+		print("************************************************************************************")
+		
+		print("keys for X_train_100",self.y_train_10[0])
+		# print("keys for _y_train_100")
+
+		print("\nLABELS TRAINING DATA/ META DATA********************************")
 		print("Data FINE LABELS UNIQUE cipar_100_train",self.unique_labels_cipar_100)
 		
 		print("Data COARSE LABELS UNIQUE cipar_100_train",self.coarse_labels_cipar_100)
@@ -142,8 +177,35 @@ class DataExploration:
 		print("Meta :cipar 100: Label Names",self.unique_labels_meta_cipar_100)
 
 		print("Meta:cipar 10 :Label Names:",self.unique_labels_meta_cipar_10)
+		print("******** X_TRAIN /Y_TRAIN X_TEST/Y_TEST   OBJECT TYPE************")
+		print("X_train_100 ",type(self.X_train_100))
+		print("y_train_100 ",type(self.y_train_100))
+		print("X_test_100 ",type(self.X_test_100))
+		print("y_test_100 ",type(self.y_test_100))
 
-		print("\n************************************************************************************************")
+
+		print("X_train_10 ",type(self.X_train_10))
+		print("y_train_10 ",type(self.y_train_10))
+		print("X_test_10 ",type(self.X_test_10))
+		print("y_test_10 ",type(self.y_test_10))
+
+		print("*******************************************************************************")
+		print("*********X_train/y_train X_Test/y_test SHAPE")
+
+		print("X_train_100 SHAPE ",self.X_train_100.shape)
+		print("y_train_100 SHAPE ",self.y_train_100.shape)
+		print("X_test_100 SHAPE ",self.X_test_100.shape)
+		print("y_test_100 SHAPE ",self.y_test_100.shape)
+		
+
+
+
+
+		print("X_train_10 SHAPE ",self.X_train_10.shape)
+		print("y_train_10 SHAPE ",self.y_train_10.shape)
+		print("X_test_10 SHAPE ",self.X_test_10.shape)
+		print("y_test_10 SHAPE ",self.y_test_10.shape)
+
 
 	#display data key and labels
 
@@ -171,6 +233,22 @@ class DataExploration:
 		
 		print("Data  SHAPE  cipar_10_train",data_sample_cipar_10.shape)
 
+	def display_image_label(self):
+		self.display_data_keys_and_labels()
+		index = np.random.randint(0, len(self.X_train_10))
+		image = self.X_train_10[index] 
+		label = self.y_train_10[index][0]
+		label_name=self.unique_labels_meta_cipar_10[label]
+		print("keys for X_train_100",self.y_train_10[index])
+		 # [b'airplane' b'automobile' b'bird' b'cat' b'deer' b'dog' b'frog' b'horse'
+		plt.figure(figsize=(3,3)) 
+		plt.imshow(image)
+		plt.title(label_name)
+		plt.axis('off')
+		plt.show()
+		
+		plt.imshow(image)
+		plt.show
 
 	def cipar_100_train(self):
 		return self.cipar_100_train
@@ -189,8 +267,12 @@ class DataExploration:
 	def unique_labels(self):
 		return self.unique_labels_cipar_100,self.unique_labels_cipar_10
 
+	#returning cipra_100 cipra_10 x,y and test
+	#already too much code in this file
+	#
+	def X_y_test_train_100(self):
+		return (self.X_train_100,self.y_train_100),(self.X_test_100,self.y_test_100)
 
-	# display_data_keys_and_labels()
+	def X_y_test_train_10(self):
+		return (self.X_train_10,self.y_train_10),(self.X_test_10,self.y_test_10)
 
-	# display_data_shape()
-	# display_data_length()
