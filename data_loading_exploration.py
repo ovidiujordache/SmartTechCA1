@@ -46,7 +46,7 @@ class DataExploration:
 		#labels in meta cipar 100
 		self.unique_labels_meta_cipar_100=None
 		
-
+		self.unique_coarse_labels_meta_100=None
 		
 		#labels in cipar10
 		self.unique_labels_cipar_10=None
@@ -155,14 +155,18 @@ class DataExploration:
 		self.unique_labels_cipar_10=np.unique(self.cipar_10_train[b'labels'])
 		
 		self.unique_labels_meta_cipar_100=np.unique(self.cipar_100_meta[b'fine_label_names'])
+
+		
+		self.unique_coarse_labels_meta_100=np.unique(self.cipar_100_meta[b'coarse_label_names'])
 		
 		keys_meta_cipar_10=self.cipar_10_meta.keys()
+		keys_meta_cipar_100=self.cipar_100_meta.keys()
 		
 		self.unique_labels_meta_cipar_10=np.unique(self.cipar_10_meta[b'label_names'])
 		print("KEYS FOR TRAINING / META DATA *****************************************************")
 
 		print("Meta:cipar 10 Keys:",keys_meta_cipar_10)
-
+		print("Meta cipar100 keys",keys_meta_cipar_100)
 
 		print("Data keys for cipar_100_train: {}".format(self.cipar_100_train.keys()))
 		
@@ -176,13 +180,16 @@ class DataExploration:
 		# print("keys for _y_train_100")
 
 		print("\nLABELS TRAINING DATA/ META DATA********************************")
-		print("Data FINE LABELS UNIQUE cipar_100_train",self.unique_labels_cipar_100)
+		fine_labels_length=len(self.unique_labels_meta_cipar_100)
+
+		print("Meta :cipar 100: Label Names length",fine_labels_length)
 		
 		print("Data COARSE LABELS UNIQUE cipar_100_train",self.coarse_labels_cipar_100)
 		
 		print("Data LABELS cipar_10_train:",self.unique_labels_cipar_10)
 
-		print("Meta :cipar 100: Label Names",self.unique_labels_meta_cipar_100)
+		print("Meta :cipar 100:Fine Label Names",self.unique_labels_meta_cipar_100)
+		print("Meta :cipar 100:Coarse Label Names",self.unique_coarse_labels_meta_100)
 
 		print("Meta:cipar 10 :Label Names:",self.unique_labels_meta_cipar_10)
 		print("******** X_TRAIN /Y_TRAIN X_TEST/Y_TEST   OBJECT TYPE************")
@@ -272,15 +279,16 @@ class DataExploration:
 		# self.coarse_labels_cipar_100=None
 
 		fine_labels_per_coarse = 5
+		#for key, value
 
 		for coarse_label, fine_label in enumerate(self.unique_labels_cipar_100):
 			for i in range(fine_labels_per_coarse):
 				fine_label_index = coarse_label * fine_labels_per_coarse + i
-				label_mapping[fine_label_index] = coarse_label
+				label_mapping[fine_label_index] = (coarse_label,self.unique_labels_meta_cipar_100[fine_label])
+				print("couarse label",coarse_label)
+				# self.unique_coarse_labels_meta_100[coarse_label]
 
-				print("Fine Label Index in cipar_100:", fine_label_index)
-				print("Coarse Label in cipar_100:", coarse_label)
-				print("Label Mapping:", label_mapping)
+		print("Label Mapping:", label_mapping)
 
 		return label_mapping
 
