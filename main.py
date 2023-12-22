@@ -1,13 +1,14 @@
-from  __init__  import *
-
-#import test_model
+from data_processing import *
 
 
-#dpf.data_processing_filter_file_test()
-# tm.test_model_file_test()
+def main():
+	dp = DataProcessing
+	dp.data_summary()
+		
 
-# dex.data_exploration_file_test()
 
 
-# dpf.data_processing_filter_file_test()
+
+if  __name__ =="__main__":
+	main()
 

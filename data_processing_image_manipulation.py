@@ -259,7 +259,23 @@ X_new_train = X_new_train.reshape(X_new_train.shape[0], 32, 32, 1)
 
 X_test = X_test.reshape(X_test.shape[0], 32, 32, 1)
 
+
 # print(X_new_train[:5])
+
+# X_new_train = np.array(list(map(preprocess, X_new_train)))
+# X_test = np.array(list(map(preprocess, X_test)))
+# print(y_new_train.shape)
+# X_new_train = X_new_train.reshape(X_new_train[2].shape, 32, 32, )
+# X_test = X_test.reshape(X_test.shape[2], 32, 32, 3)
+
+# unique_classes_train = np.unique(y_new_train)
+# unique_classes_test = np.unique(y_test)
+
+# print("Unique classes in y_new_train:", unique_classes_train)
+# print("Unique classes in y_test:", unique_classes_test)
+
+
+
 
 def test_final_data():
   for i in range(15):
