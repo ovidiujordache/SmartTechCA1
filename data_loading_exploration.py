@@ -60,7 +60,11 @@ class DataExploration:
 		#loading cipar10 batches data from unzipped archive
 		#data not in the repo
 		self._load_cipar_10_data()
-	
+		
+
+		data_to_keep_cipar_100=[ 'cattle', 'fox', 'baby', 'boy',
+		 'girl', 'man', 'woman', 'rabbit', 'quirrel', 'trees', 'bicycle', 'bus',
+		  'motorcycle', 'pickup_truck', 'train', 'lawn_mower' ,'tractor' ]
 
 
 	def _load_cipar_10_data(self):
@@ -101,6 +105,10 @@ class DataExploration:
 			
 	 	# loading X_train y_train from cipar10 using tensorflow datasets
 		(self.X_train_10,self.y_train_10),(self.X_test_10,self.y_test_10)=datasets.cifar10.load_data()
+
+		#ensure labels and other data is initialized
+		#keys and labels are initialized in this 
+		self.display_data_keys_and_labels()
 
 	def _load_cipar_100_data(self):
 		# Training data  cipar 100
@@ -234,10 +242,13 @@ class DataExploration:
 		print("Data  SHAPE  cipar_10_train",data_sample_cipar_10.shape)
 
 	def display_image_label(self):
-		self.display_data_keys_and_labels()
+		
 		index = np.random.randint(0, len(self.X_train_10))
 		image = self.X_train_10[index] 
 		label = self.y_train_10[index][0]
+		
+		
+		
 		label_name=self.unique_labels_meta_cipar_10[label]
 		print("keys for X_train_100",self.y_train_10[index])
 		 # [b'airplane' b'automobile' b'bird' b'cat' b'deer' b'dog' b'frog' b'horse'
@@ -246,9 +257,45 @@ class DataExploration:
 		plt.title(label_name)
 		plt.axis('off')
 		plt.show()
+	
+	def drop_data(self):
+		pass
+
+
+	def map_labels(self):
+		label_mapping = {}
+
+		# #Fine labels of cipar100 no-duplicates 
+		# self.unique_labels_cipar_100=None
 		
-		plt.imshow(image)
-		plt.show
+		# #Course labels in cipar100
+		# self.coarse_labels_cipar_100=None
+
+		fine_labels_per_coarse = 5
+
+		for coarse_label, fine_label in enumerate(self.unique_labels_cipar_100):
+			for i in range(fine_labels_per_coarse):
+				fine_label_index = coarse_label * fine_labels_per_coarse + i
+				label_mapping[fine_label_index] = coarse_label
+
+				print("Fine Label Index in cipar_100:", fine_label_index)
+				print("Coarse Label in cipar_100:", coarse_label)
+				print("Label Mapping:", label_mapping)
+
+		return label_mapping
+
+		# for fine_label, coarse_label in enumerate(self.coarse_labels_cipar_100):
+		# 	label_mapping[fine_label] = coarse_label
+		# 	print("fine label key:",fine_label)
+		# 	print("coarse label value",coarse_label)
+		# 	print("label mapping",label_mapping)
+		# return label_mapping
+
+
+
+
+
+
 
 	def cipar_100_train(self):
 		return self.cipar_100_train

@@ -19,13 +19,14 @@ class DataProcessing:
 
 	def set_data(self):
 		self.dex.display_image_label()
+		self.dex.map_labels()
 		# self.X_train
 		
 # automobile, bird, cat, deer, dog, horse, truck cipar10
 
 #cipar100
-# cattle, fox, baby, boy, girl, man, woman, rabbit, squirrel, trees
-# (superclass), bicycle, bus, motorcycle, pickup truck, train, lawn-mower and tractor 
+# cattle, fox, baby, boy, girl, man, woman, rabbit, squirrel, !!!! trees!!!!!
+# , bicycle, bus, motorcycle, pickup_truck, train, lawn_mower and tractor 
 
 
 
