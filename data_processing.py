@@ -50,4 +50,4 @@ class DataProcessing:
 
 	# 	while cipar_100_labels =true:
 	# 		cipra1.labe cipar_100_labels
-	# 		X_train.update(cipra10[index])
+	# 		X_train.update(cipra10[index])		
