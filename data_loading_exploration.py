@@ -220,7 +220,7 @@ class DataExploration:
 		print("y_train_10 SHAPE ",self.y_train_10.shape)
 		print("X_test_10 SHAPE ",self.X_test_10.shape)
 		print("y_test_10 SHAPE ",self.y_test_10.shape)
-
+		print("batch_label",self.cipar_100_train[b'batch_label'])
 
 	#display data key and labels
 
@@ -269,75 +269,6 @@ class DataExploration:
 		pass
 
 
-	def map_labels(self):
-			
-		#this coar_id_fine_id is from github  https://gist.github.com/adam-dziedzic/4322df7fc26a1e75bee3b355b10e30bc
-		coarse_id_fine_id ={0: [4, 30, 55, 72, 95],
-				1: [1, 32, 67, 73, 91],
-				2: [54, 62, 70, 82, 92],
-				3: [9, 10, 16, 28, 61],
-				4: [0, 51, 53, 57, 83],
-				5: [22, 39, 40, 86, 87],
-				6: [5, 20, 25, 84, 94],
-				7: [6, 7, 14, 18, 24],
-				8: [3, 42, 43, 88, 97],
-				9: [12, 17, 37, 68, 76],
-				10: [23, 33, 49, 60, 71],
-				11: [15, 19, 21, 31, 38],
-				12: [34, 63, 64, 66, 75],
-				13: [26, 45, 77, 79, 99],
-				14: [2, 11, 35, 46, 98],
-				15: [27, 29, 44, 78, 93],
-				16: [36, 50, 65, 74, 80],
-				17: [47, 52, 56, 59, 96],
-				18: [8, 13, 48, 58, 90],
-				19: [41, 69, 81, 85, 89]}
-		coarse_name_fine_name={'aquatic mammals': ['beaver', 'dolphin', 'otter', 'seal', 'whale'],
-			'fish': ['aquarium_fish', 'flatfish', 'ray', 'shark', 'trout'],
-			'flowers': ['orchid', 'poppy', 'rose', 'sunflower', 'tulip'],
-			'food containers': ['bottle', 'bowl', 'can', 'cup', 'plate'],
-			'fruit and vegetables': ['apple',
-			'mushroom',
-			'orange',
-			'pear',
-			'sweet_pepper'],
-			'household electrical device': ['clock',
-			'computer_keyboard',
-			'lamp',
-			'telephone',
-			'television'],
-			'household furniture': ['bed', 'chair', 'couch', 'table', 'wardrobe'],
-			'insects': ['bee', 'beetle', 'butterfly', 'caterpillar', 'cockroach'],
-			'large carnivores': ['bear', 'leopard', 'lion', 'tiger', 'wolf'],
-			'large man-made outdoor things': ['bridge',
-			'castle',
-			'house',
-			'road',
-			'skyscraper'],
-			'large natural outdoor scenes': ['cloud',
-											'forest',
-											'mountain',
-											'plain',
-										'sea'],
-				'large omnivores and herbivores': ['camel',
-		'cattle',
-		'chimpanzee',
-		'elephant',
-			'kangaroo'],
-			'medium-sized mammals': ['fox', 'porcupine', 'possum', 'raccoon', 'skunk'],
-			'non-insect invertebrates': ['crab', 'lobster', 'snail', 'spider', 'worm'],
-			'people': ['baby', 'boy', 'girl', 'man', 'woman'],
-			'reptiles': ['crocodile', 'dinosaur', 'lizard', 'snake', 'turtle'],
-			'small mammals': ['hamster', 'mouse', 'rabbit', 'shrew', 'squirrel'],
-			'trees': ['maple_tree', 'oak_tree', 'palm_tree', 'pine_tree', 'willow_tree'],
-			'vehicles 1': ['bicycle', 'bus', 'motorcycle', 'pickup_truck', 'train'],
-			'vehicles 2': ['lawn_mower', 'rocket', 'streetcar', 'tank', 'tractor']}
-					
-
-
-
-
-
 
 
 
@@ -354,6 +285,9 @@ class DataExploration:
 	def cipar_10_test():
 		return self.cipar_10_test
 
+
+	def get_cipar_100_train(self):
+		return self.cipar_100_train
 	#unique labels
 	def unique_labels(self):
 		return self.unique_labels_cipar_100,self.unique_labels_cipar_10

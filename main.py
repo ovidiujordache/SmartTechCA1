@@ -2,18 +2,21 @@ from data_processing import *
 
 
 def main():
-	dex = DataExploration()
+	# dex = DataExploration()
 
-	dex.display_data_keys_and_labels()
+	# dex.display_data_keys_and_labels()
 
-	cipar_100_labels, cipar_10_labels = dex.unique_labels()
+	# cipar_100_labels, cipar_10_labels = dex.unique_labels()
 
-	dex.display_data_keys_and_labels()
+	# dex.display_data_keys_and_labels()
 
-	dex.display_data_shape()
+	# dex.display_data_shape()
 
 	dp= DataProcessing()
-	dp.set_data()
+	# dp.summary()
+	dp.keep_data_for_labels()
+	pass
+
 
 
 if  __name__ =="__main__":
