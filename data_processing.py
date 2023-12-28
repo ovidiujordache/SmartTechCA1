@@ -13,6 +13,7 @@ class DataProcessing:
 	
 
 
+	
 	def __init__(self):
 		#getting the data for two
 		
@@ -22,13 +23,17 @@ class DataProcessing:
 		self.label_names=self.dex.labels()
 
 
-	def random_brightness(image):
+	
+	def random_brightness(self,image):
 		hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 		rand = random.uniform(0.3, 1.0)
 		hsv[:, :, 2] = rand*hsv[:, :, 2]
 		new_img = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
 
-	def zoom(image):
+	
+
+
+	def zoom(self,image):
 		zoom_pix = random.randint(0, 10)
 		zoom_factor = 1 + (2*zoom_pix)/32
 		image = cv2.resize(image, None, fx=zoom_factor,
@@ -37,18 +42,50 @@ class DataProcessing:
 		left_crop = (image.shape[1] - 32)//2
 		image = image[top_crop: top_crop+32,
                   left_crop: left_crop+32]
-	def flip_vertically(image):
+	
+	def flip_vertically(self,image):
 		flip_prob = random.uniform(0, 1)
 		flip_new_image = image
 		if flip_prob > 0.5:
 			flip_new_image = cv2.flip(image, 0)
 		return flip_new_image
 
-	def grayscale(img):
+	def grayscale(self,img):
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 		return img
-	def equalize(img):
+	def equalize(self,img):
 		img = cv2.equalizeHist(img)
 		return img
 
+	def preprocess(self,img):
+  		img = grayscale(img)
+  		img = equalize(img)
+  		img = img/255
+  		#same image stacked for 3 channels
+ 		# img = np.stack((img, img, img), axis=-1)
+  		return img
+
+
+	def test_final_data(self):
+		for i in range(15):
+			plt.subplot(1, 15, i+1)
+			plt.imshow(X_new_train[i])
+			plt.axis('off')
+			plt.title(f"Sample {i+1}")
+
+		plt.show()
+
+	def concatenate_data(self):
+
+		self.X_new_train = np.array(list(map(preprocess, X_new_train)))
+		X_test = np.array(list(map(preprocess, X_test)))
+
+		X_new_train = X_new_train.reshape(X_new_train.shape[0], 32, 32, 1)
+
+		X_test = X_test.reshape(X_test.shape[0], 32, 32, 1)
+		#augmented added concatenated new data
+		#watch for y_train (where labels are)
+	def final_data():
+
+		pass

@@ -13,8 +13,6 @@ def main():
 	# dex.display_data_shape()
 
 
-#	pass
-
 	
 
 	img = mpimg.imread('st.png')
