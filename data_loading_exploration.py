@@ -177,7 +177,7 @@ labels_100=["baby", "boy", "girl", "man", "woman", "rabbit", "squirrel",
 #and what labels are required from cipar 10
 
 
-cipar10_id_list = [1, 2, 3, 4, 5, 7, 9]
+cipar10_id_list = [1,3, 4, 5, 7, 9]
 
 
 
@@ -187,6 +187,12 @@ cipar10_id_list = [1, 2, 3, 4, 5, 7, 9]
 
 class DataExploration:
 	def __init__(self):
+		self.X_train=None
+		self.y_train=None
+		self.X_test=None
+		self.y_test=None
+		
+
 		#cipra100 X,y, test data
 		self.X_train_100=None
 		self.y_train_100=None
@@ -194,10 +200,10 @@ class DataExploration:
 		self.y_test_100=None
 
 		#cipra10 X,y, test data
-		self.Xtrain_10=None
+		self.X_train_10=None
 		self.y_train_10=None
-		self.X_test_100=None
-		self.y_test_100=None
+		self.X_test_10=None
+		self.y_test_10=None
 
 		#all data in cipra100
 		self.cipar_100_train = {}
@@ -292,6 +298,7 @@ class DataExploration:
 		#keys and labels are initialized in this 
 		self.display_data_keys_and_labels()
 		self.keep_data_for_labels()
+		self.filter_data()
 
 	def _load_cipar_100_data(self):
 		# Training data  cipar 100
@@ -341,7 +348,7 @@ class DataExploration:
 		
 		self.unique_labels_meta_cipar_100=np.unique(self.cipar_100_meta[b'fine_label_names'])
 
-
+		print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",len(self.X_train_10))
 		
 		self.unique_coarse_labels_meta_100=np.unique(self.cipar_100_meta[b'coarse_label_names'])
 		
@@ -491,46 +498,121 @@ class DataExploration:
 		print("them lot labels:",self.them_lot_labels)
 		
 
-
-		filter_indices = np.array([((self.unique_labels_meta_cipar_100[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_train_100])
-		print("New number of samples:", len(self.X_train_100))
-# Remove elements from the original arrays in-place
-		self.X_train_100 = self.X_train_100[filter_indices]
-		self.y_train_100 = self.y_train_100[filter_indices]
-
-		j=0
-
-		# for index in range(len(self.X_train_100)):
-		# # 			index = np.random.randint(0, len(self.X_train_10))
-		# 	# print("iterate :",j)
-		# 	j+=1
-			
-			
-		# 	label=self.y_train_100[index][0]
-		# 	label_name=(self.unique_labels_meta_cipar_100[label]).decode('utf-8')
+		#filters for X_train_100 and X_test_100
+		filter_indices_100 = np.array([((self.unique_labels_meta_cipar_100[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_train_100])
+		filter_indices_100_test = np.array([((self.unique_labels_meta_cipar_100[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_test_100])
 		
-		# 	label = self.y_train_100[index][0]
-		# 	image = self.X_train_100[index]
+		##filters for X_train_10 and X_test10
+		filter_indices_10=np.array([((self.unique_labels_meta_cipar_10[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_train_10])
+		filter_indices_10_test=np.array([((self.unique_labels_meta_cipar_10[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_test_10])
+		#checking size and shape before
+		print("**************************************************************")
+		print("Original data for X_train_100:", len(self.X_train_100))
+		print("Original shape",self.X_train_100.shape)
 		
-		# 	plt.figure(figsize=(2,2)) 
-		# 	plt.imshow(image)
-		# 	plt.title(label_name)
-		# 	plt.axis('off')
-			plt.show()
+		print("Original data for X_test_100:", len(self.X_test_100))
+		print("Original shape for X_test_100",self.X_test_100.shape)
+
+		print("**************************************************************")
+		print("Original data for X_train_10:", len(self.X_train_10))
+		print("Original shape X_train_10:",self.X_train_10.shape)
+		
+		print("Original data for X_test_10:", len(self.X_test_10))
+		print("Original shape for X_test_10",self.X_test_10.shape)
+
+
+		#applying the filter for X_train_100 and y_train and X_test_100 y_test_100
+
+		self.X_train_100 = self.X_train_100[filter_indices_100]
+		self.y_train_100 = self.y_train_100[filter_indices_100]
+
+		self.X_test_100=self.X_test_100[filter_indices_100_test]
+		
+		self.y_test_100=self.y_test_100[filter_indices_100_test]
+
+
+		#applying the filter for X_train_10 and y_train and X_test10 y_test_10
+		self.X_train_10 = self.X_train_10[filter_indices_10]
+		self.y_train_10 = self.y_train_10[filter_indices_10]
+
+		self.X_test_10=self.X_test_10[filter_indices_10_test]
+		
+		self.y_test_10=self.y_test_10[filter_indices_10_test]
+
 	
-		print("New number of samples:", len(self.X_train_100))
+	
+	
+		print("**************************************************************")
+		print("Filtered Data for X_train_100:", len(self.X_train_100))
+		print("Filtered Data shape for X_train_100",self.X_train_100.shape)
+
+		print("Filtered data for X_test_100:", len(self.X_test_100))
+		print("Filtered Data shape for X_test_100",self.X_test_100.shape)
+
+		print("**************************************************************")
+		print("Filtered data for X_train_10:", len(self.X_train_10))
+		print("Filtered Data shape X_train_10:",self.X_train_10.shape)
 		
-		# label_name=self.unique_labels_meta_cipar_10[label]
-		# print("keys for X_train_100",self.y_train_10[index])
-		#  # [b'airplane' b'automobile' b'bird' b'cat' b'deer' b'dog' b'frog' b'horse'
-		# plt.figure(figsize=(3,3)) 
+		print("Filtered  data for X_test_10:", len(self.X_test_10))
+		print("Filterd Data shape for X_test_10",self.X_test_10.shape)
+			
+		self.X_train = np.vstack((self.X_train_100, self.X_train_10))
+		self.y_train = np.concatenate((self.y_train_100, self.y_train_10))
+		self.X_test= np.vstack((self.X_test_100, self.X_test_10))
+		self.y_test = np.concatenate((self.y_test_100, self.y_test_10))
+		
+		print("*******************************")
+		print("Combined DATA::X_train",len(self.X_train))
+		print("Combined DATA::y_train",len(self.y_train))
+		print("Combined DATA::X_test",len(self.X_test))
+		print("Combined DATA::y_test",len(self.y_test))
+
+		# index=40000
+		# label_id=self.y_train[index][0]
+		# label_name = self.reverse_dict_lookup(self.them_lot_labels,label_id)		
+			
+
+
+		# print(label_name)
+		
+		# image = self.X_train[index]
+		
+		# 	# plt.figure(figsize=(2,2)) 
 		# plt.imshow(image)
-		# plt.title(label_name)
+		# plt.title(f"ID: {label_id}, Name: {label_name}")
 		# plt.axis('off')
 		# plt.show()
+		#20 random pictures and labels
+		for i in range(20):
+
+			index = np.random.randint(0, len(self.X_train))
 			
+			label_id=self.y_train[index][0]
+			label_name = self.reverse_dict_lookup(self.them_lot_labels,label_id)		
 			
+
+
+			print(label_name)
 		
+			image = self.X_train[index]
+		
+			plt.figure(figsize=(2,2)) 
+			plt.imshow(image)
+			plt.title(f"ID: {label_id}, Name: {label_name}")
+			plt.axis('off')
+			plt.show()
+
+	#this method exists because of the duplicate value id in cifar10 and cipar100
+	#instead of using label_id as a key I used , label_name as a key
+	#using this method it flips the lookup of the dictionary.
+	#
+	def reverse_dict_lookup(self,dict,value):
+		for key, val in dict.items():
+			if val == value:
+				return key
+		return None
+	
+
 
 	def cipar_100_train(self):
 		return self.cipar_100_train
@@ -546,20 +628,15 @@ class DataExploration:
 		return self.cipar_10_test
 
 
-	def get_cipar_100_train(self):
-		return self.cipar_100_train
-	#unique labels
-	def unique_labels(self):
-		return self.unique_labels_cipar_100,self.unique_labels_cipar_10
 
 	def unique_labels_10(self):
 		return self.unique_labels_meta_cipar_10
 	#returning cipra_100 cipra_10 x,y and test
 	#already too much code in this file
 	#
-	def X_y_test_train_100(self):
-		return (self.X_train_100,self.y_train_100),(self.X_test_100,self.y_test_100)
+	def X_y_test_train(self):
+		return (self.X_train,self.y_train),(self.X_test,self.y_test)
 
-	def X_y_test_train_10(self):
-		return (self.X_train_10,self.y_train_10),(self.X_test_10,self.y_test_10)
 
+	def labels(self):
+		return self.them_lot_labels
