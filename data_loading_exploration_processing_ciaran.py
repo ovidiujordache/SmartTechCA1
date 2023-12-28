@@ -262,7 +262,7 @@ X_new_train = X_new_train.reshape(X_new_train.shape[0], 32, 32, 1)
 
 X_test = X_test.reshape(X_test.shape[0], 32, 32, 1)
 
-# print(X_new_train[:5])
+# print(X_new_trainb[:5])
 
 
 

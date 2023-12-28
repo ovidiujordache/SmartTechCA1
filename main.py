@@ -13,8 +13,8 @@ def main():
 	# dex.display_data_shape()
 
 	dp= DataProcessing()
-	# dp.summary()
-	dp.keep_data_for_labels()
+	dp.summary()
+	
 	pass
 
 
@@ -22,4 +22,3 @@ def main():
 if  __name__ =="__main__":
 	main()
 
-		
