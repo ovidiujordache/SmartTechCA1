@@ -10,24 +10,58 @@ from  data_loading_exploration import *
 
 class DataProcessing:
 
-			
-		#this coars_id_fine_id is from github  https://gist.github.com/adam-dziedzic/4322df7fc26a1e75bee3b355b10e30bc
-
-
-
-
-
-
-
+	
 	def __init__(self):
-		#getting the data for two
-		
+		#getting the data 
+		#data in this file comes from data_loading_exploration file
+		#DataExploration object/class
 		self.dex= DataExploration()
 		(self.X_train,self.y_train),(self.X_test,self.y_test)=self.dex.X_y_test_train()
 		
 		self.label_names=self.dex.labels()
-	def summary(self):
-		print(self.label_names)
-		# self.dex.display_image_label()
-		# #we have data here
+		#flow of data through the files .
+		#Data in this code is like a Good Wiskey from initial raw fermented grain mash
+		#going trough different stages and barrels Whiskey IN- Whiskey OUT
 	
+	
+
+
+	def test_data_loaded():
+		print(X_train1.shape, y_train1.shape, X_test1.shape, y_test1.shape)
+		print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+
+
+
+
+
+
+	def random_brightness(image):
+		hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+		rand = random.uniform(0.3, 1.0)
+		hsv[:, :, 2] = rand*hsv[:, :, 2]
+		new_img = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+
+	def zoom(image):
+		zoom_pix = random.randint(0, 10)
+		zoom_factor = 1 + (2*zoom_pix)/32
+		image = cv2.resize(image, None, fx=zoom_factor,
+                       fy=zoom_factor, interpolation=cv2.INTER_LINEAR)
+		top_crop = (image.shape[0] - 32)//2
+		left_crop = (image.shape[1] - 32)//2
+		image = image[top_crop: top_crop+32,
+                  left_crop: left_crop+32]
+	def flip_vertically(image):
+		flip_prob = random.uniform(0, 1)
+		flip_new_image = image
+		if flip_prob > 0.5:
+			flip_new_image = cv2.flip(image, 0)
+		return flip_new_image
+
+	def grayscale(img):
+		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+		return img
+	def equalize(img):
+		img = cv2.equalizeHist(img)
+		return img
+
