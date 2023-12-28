@@ -490,17 +490,6 @@ class DataExploration:
 	def filter_data(self):
 		print("them lot labels:",self.them_lot_labels)
 		
-		#iterating thorugh the array to find the indices of the labels
-		# filtered_indices_100 = np.isin(self.unique_labels_meta_cipar_100, list(self.them_lot_labels))
-		# filtered_indices_10 = np.isin(self.unique_labels_meta_cipar_10, list(self.them_lot_labels))
-		# print(type(filtered_indices_100))
-		#from requirements
-		# print(labels_100)
-		# print(filtered_indices_100)
-		# print(cipar10_id_list)
-		# print(filtered_indices_10)
-		# image = self.X_train_10[index] 
-		# label = self.y_train_10[index][0]
 
 
 		filter_indices = np.array([((self.unique_labels_meta_cipar_100[label[0]]).decode('utf-8')) in self.them_lot_labels for label in self.y_train_100])
@@ -510,23 +499,23 @@ class DataExploration:
 		self.y_train_100 = self.y_train_100[filter_indices]
 
 		j=0
-		# filtered_indices_100=[]
-		for index in range(len(self.X_train_100)):
-		# 			index = np.random.randint(0, len(self.X_train_10))
-			# print("iterate :",j)
-			j+=1
+
+		# for index in range(len(self.X_train_100)):
+		# # 			index = np.random.randint(0, len(self.X_train_10))
+		# 	# print("iterate :",j)
+		# 	j+=1
 			
 			
-			label=self.y_train_100[index][0]
-			label_name=(self.unique_labels_meta_cipar_100[label]).decode('utf-8')
+		# 	label=self.y_train_100[index][0]
+		# 	label_name=(self.unique_labels_meta_cipar_100[label]).decode('utf-8')
 		
-			label = self.y_train_100[index][0]
-			image = self.X_train_100[index]
+		# 	label = self.y_train_100[index][0]
+		# 	image = self.X_train_100[index]
 		
-			plt.figure(figsize=(2,2)) 
-			plt.imshow(image)
-			plt.title(label_name)
-			plt.axis('off')
+		# 	plt.figure(figsize=(2,2)) 
+		# 	plt.imshow(image)
+		# 	plt.title(label_name)
+		# 	plt.axis('off')
 			plt.show()
 	
 		print("New number of samples:", len(self.X_train_100))
@@ -542,13 +531,7 @@ class DataExploration:
 			
 			
 		
-		# filtered_indices_100=np.array(filtered_indices_100)		
-		# print(len(filtered_indices_100))
 
-		# X_train_100X= self.X_train_100[filtered_indices_100]
-		# self.y_train_100=self.y_train_100[filtered_indices_100]
-		# self.X_test_100=self.X_test_100[filtered_indices_100]
-		# self.y_test_100=self.y_train_100[filtered_indices_100]
 	def cipar_100_train(self):
 		return self.cipar_100_train
 
