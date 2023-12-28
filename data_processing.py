@@ -26,8 +26,4 @@ class DataProcessing:
 		(self.X_train,self.y_train),(self.X_test,self.y_test)=self.dex.X_y_test_train()
 		
 		self.label_names=self.dex.labels()
-	def summary(self):
-		print(self.label_names)
-		# self.dex.display_image_label()
-		# #we have data here
 	

@@ -12,11 +12,7 @@ def main():
 
 	# dex.display_data_shape()
 
-	dp= DataProcessing()
-	dp.summary()
-
 	pass
-
 
 
 if  __name__ =="__main__":
