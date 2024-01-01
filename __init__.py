@@ -39,11 +39,12 @@ import tarfile as tarfile
 import gzip
 from sklearn.model_selection import train_test_split
 
+from sklearn.utils import shuffle
 
 
 
 
-__all__=["datasets","gzip","tarfile","train_test_split","randint","models","layers","tf","np","plt","keras",
+__all__=["shuffle","datasets","gzip","tarfile","train_test_split","randint","models","layers","tf","np","plt","keras",
 		"Sequential","Dense","Adam","to_categorical",
 		"Dropout","Flatten","Conv2D","MaxPooling2D",
 		"pickle","pd","random","cv2"];

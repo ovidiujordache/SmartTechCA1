@@ -18,9 +18,9 @@ def main():
 	# img = mpimg.imread('st.png')
 	# imgplot = plt.imshow(img)
 	# plt.show()
-	pass
-	# bm=BuildModel()
-	# bm.build_model()
+	# pass
+	bm=BuildModel()
+	bm.build_model()
 
 if  __name__ =="__main__":
 	main()

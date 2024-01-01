@@ -58,34 +58,29 @@ class DataProcessing:
 		img = cv2.equalizeHist(img)
 		return img
 
+
+	def gaussian(self,img):
+		img = cv2.GaussianBlur(img, (3,3), 0)
+		return img
+
 	def preprocess(self,img):
-  		img = grayscale(img)
-  		img = equalize(img)
+  		img = self.grayscale(img)
+  		img = self.equalize(img)
   		img = img/255
   		#same image stacked for 3 channels
  		# img = np.stack((img, img, img), axis=-1)
   		return img
 
 
-	def test_final_data(self):
-		for i in range(15):
-			plt.subplot(1, 15, i+1)
-			plt.imshow(X_new_train[i])
-			plt.axis('off')
-			plt.title(f"Sample {i+1}")
 
-		plt.show()
 
-	def concatenate_data(self):
+	def apply_preprocess(self):
+		self.X_train = np.array(list(map(self.preprocess, self.X_train)))
+		self.X_test = np.array(list(map(self.preprocess, self.X_test)))
+		self.X_train = self.X_train.reshape(self.X_train.shape[0], 32, 32, 1)
+		self.X_test = self.X_test.reshape(self.X_test.shape[0], 32, 32, 1)
 
-		self.X_new_train = np.array(list(map(preprocess, X_new_train)))
-		X_test = np.array(list(map(preprocess, X_test)))
 
-		X_new_train = X_new_train.reshape(X_new_train.shape[0], 32, 32, 1)
-
-		X_test = X_test.reshape(X_test.shape[0], 32, 32, 1)
-		#augmented added concatenated new data
-		#watch for y_train (where labels are)
-	def final_data():
-
-		pass
+		return (self.X_train,self.y_train),(self.X_test,self.y_test)
+	def shape(self):
+		print("ytrain shape", self.y_train.shape)
