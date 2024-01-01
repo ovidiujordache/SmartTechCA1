@@ -199,6 +199,7 @@ cipar10_id_list = [1,3, 4, 5, 7, 9]
 
 class DataExploration:
 	def __init__(self):
+
 		self.X_train=None
 		self.y_train=None
 		self.X_test=None
@@ -507,6 +508,7 @@ class DataExploration:
 
 
 	def filter_data(self):
+		
 		print("them lot labels:",self.them_lot_labels)
 		
 
@@ -572,12 +574,16 @@ class DataExploration:
 		self.y_train = np.concatenate((self.y_train_100, self.y_train_10))
 		self.X_test= np.vstack((self.X_test_100, self.X_test_10))
 		self.y_test = np.concatenate((self.y_test_100, self.y_test_10))
-		
+
 		print("*******************************")
-		print("Combined DATA::X_train",len(self.X_train))
-		print("Combined DATA::y_train",len(self.y_train))
-		print("Combined DATA::X_test",len(self.X_test))
-		print("Combined DATA::y_test",len(self.y_test))
+		print("Combined DATA SHAPE::X_train",self.X_train.shape)
+		print("Combined DATA SHAPE::y_train",self.y_train.shape)
+		print("Combined DATA SHAPE::X_test",self.X_test.shape)
+		print("Combined DATA SHAPE::y_test",self.y_test.shape)
+		print("Combined DATA SHAPE::X_train",self.X_train.shape)
+		print("Combined DATA SHAPE::y_train",self.y_train.shape)
+		print("Combined DATA SHAPE::X_test",self.X_test.shape)
+		print("Combined DATA SHAPE::y_test",self.y_test.shape)
 
 		# index=40000
 		# label_id=self.y_train[index][0]
@@ -595,6 +601,7 @@ class DataExploration:
 		# plt.axis('off')
 		# plt.show()
 		#20 random pictures and labels
+		
 		for i in range(3):
 
 			index = np.random.randint(0, len(self.X_train))
