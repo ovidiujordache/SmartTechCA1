@@ -41,11 +41,12 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.utils import shuffle
 from keras.preprocessing.image import ImageDataGenerator 
+from keras.optimizers import SGD
+from keras.callbacks import LearningRateScheduler
 
 
 
-
-__all__=["ImageDataGenerator","shuffle","datasets","gzip","tarfile","train_test_split","randint","models","layers","tf","np","plt","keras",
+__all__=["SGD","LearningRateScheduler","ImageDataGenerator","shuffle","datasets","gzip","tarfile","train_test_split","randint","models","layers","tf","np","plt","keras",
 		"Sequential","Dense","Adam","to_categorical",
 		"Dropout","Flatten","Conv2D","MaxPooling2D",
 		"pickle","pd","random","cv2"];

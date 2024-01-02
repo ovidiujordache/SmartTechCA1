@@ -510,31 +510,32 @@ class DataExploration:
 
 	def add_images(self):
 		datagen = ImageDataGenerator(
+		# rescale=1./255,
 		rotation_range=20,      # Randomly rotate images in the range (degrees, 0 to 180)
-		# width_shift_range=0.2,  # Randomly shift images horizontally (fraction of total width)
-		# height_shift_range=0.2, # Randomly shift images vertically (fraction of total height)
-		# zoom_range=0.2,         # Randomly zoom in/out on images
-		# brightness_range=(0.8, 1.2),  # Randomly adjust brightness
-		# horizontal_flip=True,   # Randomly flip images horizontally
-		# fill_mode='nearest'     # Fill in newly created pixels near the edges using the nearest pixel values
+		width_shift_range=0.2,  # Randomly shift images horizontally (fraction of total width)
+		height_shift_range=0.2, # Randomly shift images vertically (fraction of total height)
+		zoom_range=0.2,         # Randomly zoom in/out on images
+		brightness_range=(0.8, 1.2),  # Randomly adjust brightness
+		horizontal_flip=True,   # Randomly flip images horizontally
+		fill_mode='nearest'     # Fill in newly created pixels near the edges using the nearest pixel values
 			)
 
 # Fit the ImageDataGenerator on your original dataset
-		self.X_train_100 = self.X_train_100 / 255.0
+		self.X_train_100 = self.X_train_100
 
 		datagen.fit(self.X_train_100)
 
 		augmented_images_per_original = 9
 
-		augmented_X, augmented_y = [], []
+		augmented_X, augmented_y = [],[] 
 		for X_batch, y_batch in datagen.flow(self.X_train_100, self.y_train_100, batch_size=augmented_images_per_original, shuffle=False):
 			augmented_X.extend(X_batch)
 			augmented_y.extend(y_batch)
 			if len(augmented_X) >= len(self.X_train_100) * augmented_images_per_original:
 					break
 
-		augmented_X = np.array(augmented_X)
-		augmented_y = np.array(augmented_y)
+		augmented_X = np.array(augmented_X, dtype=np.uint8)
+		augmented_y = np.array(augmented_y, dtype=np.uint8)
 
 
 		self.X_train_100 = np.concatenate((self.X_train_100, augmented_X))
@@ -657,7 +658,7 @@ class DataExploration:
 			image = self.X_train[index]
 		
 			plt.figure(figsize=(2,2)) 
-			plt.imshow(image)
+			plt.imshow(image.astype('uint8'))
 			plt.title(f"ID: {label_id}, Name: {label_name}")
 			plt.axis('off')
 			plt.show()

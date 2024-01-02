@@ -1,8 +1,13 @@
 from data_processing import *
+
 import matplotlib.image as mpimg
 from build_model import *
+from display import *
+
+
+
 def main():
-	dex = DataExploration()
+	# dex = DataExploration()
 
 	# # dex.display_data_keys_and_labels()
 
@@ -18,9 +23,11 @@ def main():
 	# img = mpimg.imread('st.png')
 	# imgplot = plt.imshow(img)
 	# plt.show()
-	# pass
+	pass
 	bm=BuildModel()
-	bm.build_model()
+	# bm.build_model()
+	# dis= Display()
+	# dis.plot_images()
 
 if  __name__ =="__main__":
 	main()

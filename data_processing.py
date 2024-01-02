@@ -28,7 +28,7 @@ class DataProcessing:
 		
 
 		self.label_names=self.dex.labels()
-
+		
 
 	
 	def random_brightness(self,image):
