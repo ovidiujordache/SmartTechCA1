@@ -20,6 +20,13 @@ class DataProcessing:
 		self.dex= DataExploration()
 		(self.X_train,self.y_train),(self.X_test,self.y_test)=self.dex.X_y_test_train()
 		
+		# self.cipar_100_train=self.dex.cipar_100_train()
+		# self.cipar_100_test=self.dex.cipar_100_test()
+
+		# self.cipar_10_train=self.dex.cipar_10_train()
+		# sef.cipar_10_test=self.dex.cipar_10_test()
+		
+
 		self.label_names=self.dex.labels()
 
 
@@ -51,6 +58,7 @@ class DataProcessing:
 		return flip_new_image
 
 	def grayscale(self,img):
+		img = (img * 255).astype(np.uint8)
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 		return img

@@ -313,6 +313,8 @@ class DataExploration:
 		self.keep_data_for_labels()
 		self.filter_data()
 
+		# self.display_data_type()
+
 	def _load_cipar_100_data(self):
 		# Training data  cipar 100
 		with open('./data/cifar-100-python/train', 'rb') as fo:
@@ -333,7 +335,7 @@ class DataExploration:
 
 	# Checking data types
 	def display_data_type(self):
-	    print("Data type for cipar_100_train: {}".format(type(selfcipar_100_train)))
+	    print("Data type for cipar_100_train: {}".format(type(self.cipar_100_train)))
 	    print("Data type for cipar_10_train: {}".format(type(self.cipar_10_train)))
 	    for dictItem in self.cipar_100_train:
 	    	print("Dictionary Item in cipar_100_train".format(dictItem),type(self.cipar_100_train[dictItem]))
@@ -506,7 +508,43 @@ class DataExploration:
 # (superclass), bicycle, bus, motorcycle, pickup truck, train, lawn-mower
 
 
+	def add_images(self):
+		datagen = ImageDataGenerator(
+		rotation_range=20,      # Randomly rotate images in the range (degrees, 0 to 180)
+		# width_shift_range=0.2,  # Randomly shift images horizontally (fraction of total width)
+		# height_shift_range=0.2, # Randomly shift images vertically (fraction of total height)
+		# zoom_range=0.2,         # Randomly zoom in/out on images
+		# brightness_range=(0.8, 1.2),  # Randomly adjust brightness
+		# horizontal_flip=True,   # Randomly flip images horizontally
+		# fill_mode='nearest'     # Fill in newly created pixels near the edges using the nearest pixel values
+			)
 
+# Fit the ImageDataGenerator on your original dataset
+		self.X_train_100 = self.X_train_100 / 255.0
+
+		datagen.fit(self.X_train_100)
+
+		augmented_images_per_original = 9
+
+		augmented_X, augmented_y = [], []
+		for X_batch, y_batch in datagen.flow(self.X_train_100, self.y_train_100, batch_size=augmented_images_per_original, shuffle=False):
+			augmented_X.extend(X_batch)
+			augmented_y.extend(y_batch)
+			if len(augmented_X) >= len(self.X_train_100) * augmented_images_per_original:
+					break
+
+		augmented_X = np.array(augmented_X)
+		augmented_y = np.array(augmented_y)
+
+
+		self.X_train_100 = np.concatenate((self.X_train_100, augmented_X))
+		self.y_train_100 = np.concatenate((self.y_train_100, augmented_y))
+
+		# return self.X_train_100, self.y_train_100
+		print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+		print("augmented Data for X_train_100:", len(self.X_train_100))
+
+		return self.X_train_100, self.y_train_100
 	def filter_data(self):
 		
 		print("them lot labels:",self.them_lot_labels)
@@ -569,7 +607,10 @@ class DataExploration:
 		
 		print("Filtered  data for X_test_10:", len(self.X_test_10))
 		print("Filterd Data shape for X_test_10",self.X_test_10.shape)
-			
+		
+		#columns are dropped X_train gets more images 
+		self.add_images()
+
 		self.X_train = np.vstack((self.X_train_100, self.X_train_10))
 		self.y_train = np.concatenate((self.y_train_100, self.y_train_10))
 		self.X_test= np.vstack((self.X_test_100, self.X_test_10))
@@ -625,6 +666,7 @@ class DataExploration:
 	#instead of using label_id as a key I used , label_name as a key
 	#using this method it flips the lookup of the dictionary.
 	#
+
 	def reverse_dict_lookup(self,dict,value):
 		for key, val in dict.items():
 			if val == value:
