@@ -8,13 +8,6 @@ from __init__ import *
 #  3. coarse_name_fine_name{}
 
 
-		#flow of data through the files .
-		#Data in this code is like a Good Wiskey from initial raw fermented grain mash
-		#going trough different stages and barrels Whiskey IN- Whiskey OUT 
-		#the barrels order is : Data Exploration -->here is where "data fermenation" takes place.Data is explored
-		# labels are dropped, only data of interest kept.Datasets are combined. 
-		# DataProessing ("barrel") file is where augmenation of images happen .New data is added to the set.						
-		#BuildModel is final data entering ()the model .
 fine_labels = [
     'apple',  # id 0
     'aquarium_fish',
