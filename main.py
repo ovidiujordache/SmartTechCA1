@@ -23,7 +23,7 @@ def main():
 	# img = mpimg.imread('st.png')
 	# imgplot = plt.imshow(img)
 	# plt.show()
-	pass
+	
 	bm=BuildModel()
 	bm.build_model()
 	# dis= Display()

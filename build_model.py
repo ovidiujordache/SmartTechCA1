@@ -13,12 +13,13 @@ class BuildModel:
             (self.X_train,self.y_train),(self.X_test,self.y_test)=self.dp.apply_preprocess()
             
             
-            self.X_train, self.X_valid, self.y_train, self.y_valid = train_test_split(self.X_train, self.y_train, test_size=0.2, random_state=42)
+            self.X_train, self.X_valid, self.y_train, self.y_valid = train_test_split(self.X_train, self.y_train, test_size=0.3, random_state=42)
             self.shuffle_data(randomstate=42)
-    def to_categorical(self):
-        self.y_train = to_categorical(self.y_train, 99)
-        self.y_test = to_categorical(self.y_test, 99)
-        print("shape", y_train.shape)
+    #         self.to_categorical()
+    # def to_categorical(self):
+    #     self.y_train = to_categorical(self.y_train, 99)
+    #     self.y_test = to_categorical(self.y_test, 99)
+        # print("shape", y_train.shape)
     def build_model(self):
       
         model = models.Sequential()
@@ -56,7 +57,7 @@ class BuildModel:
                   loss='sparse_categorical_crossentropy',
                   metrics=['accuracy'])
 
-        history = model.fit(self.X_train, self.y_train, epochs=50, validation_data=(self.X_valid, self.y_valid), batch_size=300, verbose=1, shuffle=1)
+        history = model.fit(self.X_train, self.y_train, epochs=100, validation_data=(self.X_valid, self.y_valid), batch_size=300, verbose=1, shuffle=1)
         test_loss, test_acc = model.evaluate(self.X_test, self.y_test)
         print(f'Test accuracy: {test_acc * 100:.2f}%')
         plt.plot(history.history['loss'])
@@ -65,11 +66,10 @@ class BuildModel:
         plt.title("Loss")
         plt.xlabel("Epoch")
 
-
+        model.save("./model/ca1_model.h5")
 
     def shuffle_data(self,randomstate):
         #shuffle from sklearn.util
-        #looks like when entering data from other set cifar10 ,it starts overfitting
         self.X_train, self.y_train=shuffle(self.X_train,self.y_train,random_state=randomstate)
 
 
