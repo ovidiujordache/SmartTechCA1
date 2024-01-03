@@ -25,7 +25,7 @@ def main():
 	# plt.show()
 	pass
 	bm=BuildModel()
-	# bm.build_model()
+	bm.build_model()
 	# dis= Display()
 	# dis.plot_images()
 
